@@ -1,19 +1,9 @@
 import math
 
 def main():
-    f = open("input", "r").readlines() # Read in file
-
-    masses = [] # Create array to hold all masses
-    totalFuelRequirement = 0
-
-    for l in f:
-        masses.append(int(l)) # Append to masses array (convert all masses to integers)
-
-    for i in masses:
-        # Get total fuel requirement - divide each mass by 3, round it down and take away 2
-        totalFuelRequirement += math.floor((i / 3)) - 2 
-
-    print(totalFuelRequirement)
+    print("Part 1:", sum([(int((int(line) / 3)) - 2) for line in open("input", "r")])) # Part 1
+    print("Part 2:", sum([(lambda f, x: x + f(f, (x // 3 )- 2) if x > 0 else 0)
+    (lambda f, x: x + f(f, (x // 3) - 2) if x > 0 else 0, (int(i) // 3) - 2) for i in open('input').readlines()])) # Part 2
 
 if __name__ == "__main__":
     main()
